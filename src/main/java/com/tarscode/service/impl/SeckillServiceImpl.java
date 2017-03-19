@@ -2,6 +2,7 @@ package com.tarscode.service.impl;
 
 import com.tarscode.dao.SeckillDao;
 import com.tarscode.dao.SuccessKilledDao;
+import com.tarscode.dao.cache.RedisDao;
 import com.tarscode.dto.Exposer;
 import com.tarscode.dto.SeckillExecution;
 import com.tarscode.entity.Seckill;
@@ -40,10 +41,8 @@ public class SeckillServiceImpl implements SeckillService {
     @Autowired //@Resource
     private SuccessKilledDao successKilledDao;
 
-    /*
     @Autowired
     private RedisDao redisDao;
-    */
 
     public List<Seckill> getSeckillList() {
         return seckillDao.queryAll(0, 4);
@@ -53,6 +52,7 @@ public class SeckillServiceImpl implements SeckillService {
         return seckillDao.queryById(seckillId);
     }
 
+    /*
     public Exposer exportSeckillUrl(long seckillId) {
         Seckill seckill = seckillDao.queryById(seckillId);
         if (seckill == null) {
@@ -72,7 +72,7 @@ public class SeckillServiceImpl implements SeckillService {
         return new Exposer(true, md5, seckillId);
 
     }
-    /*
+    */
     public Exposer exportSeckillUrl(long seckillId) {
         //优化点:缓存优化:超时的基础上维护一致性
         //1。访问redis
@@ -104,7 +104,6 @@ public class SeckillServiceImpl implements SeckillService {
         return new Exposer(true, md5, seckillId);
 
     }
-    */
 
     //MD5生成过程
     private String getMD5(long seckillId) {
