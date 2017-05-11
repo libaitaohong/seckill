@@ -75,7 +75,7 @@ public class SeckillServiceImpl implements SeckillService {
     */
     public Exposer exportSeckillUrl(long seckillId) {
         //优化点:缓存优化:超时的基础上维护一致性
-        //1。访问redis
+        //1.访问redis
 
         Seckill seckill = redisDao.getSeckill(seckillId);
         if (seckill == null) {
@@ -157,6 +157,10 @@ public class SeckillServiceImpl implements SeckillService {
             //所以编译期异常转化为运行期异常
             throw new SeckillException("seckill inner error :" + e.getMessage());
         }
+    }
+
+    public SeckillExecution executeSeckillProcedure(long seckillId, long userPhone, String md5) throws SeckillException, RepeatKillException, SeckillCloseException {
+        return null;
     }
 }
 
